@@ -1,0 +1,101 @@
+/* ═══════════════════════════════════════════
+   GOATSat · DESIGN TOKENS
+   tokens.css — single source of truth
+═══════════════════════════════════════════ */
+
+:root {
+  /* ── Layout ── */
+  --nav-h:       64px;
+  --max-w:       1160px;
+  --px:          clamp(20px, 5vw, 40px);
+
+  /* ── Radii ── */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-xl: 36px;
+
+  /* ── Typography ── */
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'IBM Plex Sans', sans-serif;
+  --font-mono:    'IBM Plex Mono', monospace;
+
+  /* ── Transitions ── */
+  --t-fast:   0.15s ease;
+  --t-base:   0.25s ease;
+  --t-slow:   0.45s ease;
+
+  /* ── Colombian Tricolor ── */
+  --col-yellow: #ffd020;
+  --col-blue:   #003893;
+  --col-red:    #ce1126;
+
+  /* ── Semantic Colours ── */
+  --green: #22c55e;
+  --red:   #ef4444;
+  --gold:  #f5c842;
+}
+
+/* ────────────────────────────────────────
+   DARK MODE  (default)
+──────────────────────────────────────── */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg-0:    #030710;
+  --bg-1:    #060c1c;
+  --bg-2:    #0b1428;
+  --bg-card: rgba(10, 18, 38, 0.75);
+  --bg-glass:rgba(14, 24, 52, 0.6);
+
+  --blue-900: #0d2260;
+  --blue-700: #1557e8;
+  --blue-500: #3b82f6;
+  --blue-300: #7ab8ff;
+  --blue-100: #dbeafe;
+
+  --text-0: #f0f5ff;
+  --text-1: #a8bcd8;
+  --text-2: #566882;
+
+  --border-0: rgba(59,130,246,0.08);
+  --border-1: rgba(59,130,246,0.18);
+  --border-2: rgba(59,130,246,0.36);
+
+  --shadow-card: 0 8px 48px rgba(0,0,0,0.55), 0 0 0 1px var(--border-0);
+  --shadow-glow: 0 0 48px rgba(21,87,232,0.28);
+  --shadow-btn:  0 4px 20px rgba(21,87,232,0.35);
+}
+
+/* ────────────────────────────────────────
+   LIGHT MODE
+──────────────────────────────────────── */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg-0:    #f5f8ff;
+  --bg-1:    #edf2ff;
+  --bg-2:    #e4eaff;
+  --bg-card: rgba(255,255,255,0.92);
+  --bg-glass:rgba(255,255,255,0.72);
+
+  --blue-900: #1557e8;
+  --blue-700: #1d4ed8;
+  --blue-500: #2563eb;
+  --blue-300: #3b82f6;
+  --blue-100: #eff6ff;
+
+  --text-0: #0c1b3a;
+  --text-1: #334e79;
+  --text-2: #7a93b8;
+
+  --border-0: rgba(21,87,232,0.1);
+  --border-1: rgba(21,87,232,0.2);
+  --border-2: rgba(21,87,232,0.38);
+
+  --shadow-card: 0 4px 24px rgba(15,40,100,0.1), 0 0 0 1px var(--border-0);
+  --shadow-glow: 0 0 32px rgba(21,87,232,0.15);
+  --shadow-btn:  0 4px 16px rgba(21,87,232,0.28);
+}

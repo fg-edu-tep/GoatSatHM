@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GOATSat v0.1 — Technical Specification</title>
+<meta name="description" content="GOAT-Sat v0.1 technical specification: mechanical, electrical, and software interfaces for modular microsatellite on-orbit upgrades." />
+<meta name="theme-color" content="#030710" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/nav.css" />
+<link rel="stylesheet" href="css/spec.css" />
+
+<script>
+  (function(){
+    var t=localStorage.getItem('goatsat-theme');
+    if(!t) t=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+    document.documentElement.setAttribute('data-theme',t);
+  })();
+</script>
+</head>
+<body>
+
+<canvas id="starfield" aria-hidden="true"></canvas>
+
+<!-- ════════════ NAV ════════════ -->
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="GOATSat home">
+      <div class="nav-logo__badge" aria-hidden="true">GS</div>
+      <span class="nav-logo__text">GOATSat</span>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="index.html#problem">The Problem</a></li>
+      <li><a href="index.html#standard">The Standard</a></li>
+      <li><a href="index.html#ecosystem">Ecosystem</a></li>
+      <li><a href="financials.html">Financial Model</a></li>
+      <li><a href="spec.html" class="active">v0.1 Spec</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="col-flag" title="Made in Colombia 🇨🇴" aria-label="Colombian flag">
+        <span></span><span></span><span></span>
+      </div>
+      <button class="theme-toggle" id="themeBtn" aria-label="Toggle colour theme">☽</button>
+      <a href="mailto:contact@goatsat.co" class="btn btn--tricolor hide-mobile">Contact Team</a>
+      <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="index.html#problem">The Problem</a>
+  <a href="index.html#standard">The Standard</a>
+  <a href="spec.html">Technical Spec</a>
+  <a href="financials.html">Financial Model</a>
+  <a href="mailto:contact@goatsat.co" class="btn btn--primary mobile-cta">Contact Team</a>
+</div>
+
+<!-- ════════════ PAGE HERO ════════════ -->
+<header class="spec-hero" aria-label="Specification header">
+  <div class="container">
+    <div class="page-crumb">
+      <a href="index.html">GOATSat</a>
+      <span>›</span>
+      <span>Technical Specification</span>
+    </div>
+    <div class="spec-hero__grid">
+      <div>
+        <span class="tag">GOATSat v0.1 · iLCSS Draft</span>
+        <h1 class="spec-hero__title">
+          GOAT-Sat v0.1<br>
+          <span class="text-gradient">Technical Specification</span>
+        </h1>
+        <p class="section-head__sub">Generalized Orbital Add-on Technology for Microsatellites — mechanical, electrical, and software interface standard.</p>
+      </div>
+      <div class="spec-hero__meta">
+        <div class="spec-hero__meta-item">
+          <span>Version</span>
+          <span>v0.1 — Draft</span>
+        </div>
+        <div class="spec-hero__meta-item">
+          <span>Published</span>
+          <span>March 24, 2026</span>
+        </div>
+        <div class="spec-hero__meta-item">
+          <span>Target Class</span>
+          <span>10–100 kg Microsatellites</span>
+        </div>
+        <div class="spec-hero__meta-item">
+          <span>Data Bus</span>
+          <span>CAN-FD · SpaceFibre</span>
+        </div>
+        <div class="spec-hero__meta-item">
+          <span>Published In</span>
+          <span>iLCSS — IEEE L-CSS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ════════════ THREE LAYERS ════════════ -->
+<section class="section" aria-label="Interface Layers">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <div class="section-head__tag"><span class="tag">Architecture</span></div>
+      <h2 class="section-head__title">Three-Layer Interface Standard</h2>
+      <p class="section-head__sub">GOATSat decomposes every docking interaction into three independent, upgradeable contracts.</p>
+    </div>
+
+    <div class="layers-grid reveal reveal-d1">
+
+      <div class="card layer-card">
+        <span class="layer-card__icon">⚙️</span>
+        <span class="layer-card__badge">M-LAYER</span>
+        <h3 class="layer-card__title">Mechanical</h3>
+        <p>Standardized docking collar with funnel-guided blind-mate geometry for autonomous docking tolerance.</p>
+        <ul>
+          <li>Keying features prevent inverted coupling</li>
+          <li>Passive or active retention latch</li>
+          <li>Defined capture zone radius and angular tolerance</li>
+          <li>Optional thermal contact pads with bounded conductance</li>
+          <li>Abandoned modules remain passively docked — no removal required</li>
+        </ul>
+      </div>
+
+      <div class="card layer-card">
+        <span class="layer-card__icon">⚡</span>
+        <span class="layer-card__badge">E-LAYER · SpaceFibre</span>
+        <h3 class="layer-card__title">Electrical</h3>
+        <p>Hot-plug capable 6-group pin sequencing with deterministic FSM and hardware fault isolation.</p>
+        <ul>
+          <li><strong>GND</strong> — Make-first, ESD discharge</li>
+          <li><strong>PRESENT</strong> — Open-drain detection</li>
+          <li><strong>VCC_IL</strong> — Current-limited init rail</li>
+          <li><strong>CAN_H/L</strong> — Negotiation bus</li>
+          <li><strong>POWER</strong> — Main rail via e-fuse</li>
+          <li><strong>SpaceFibre</strong> — High-speed TX/RX last</li>
+        </ul>
+      </div>
+
+      <div class="card layer-card">
+        <span class="layer-card__icon">🧩</span>
+        <span class="layer-card__badge">S-LAYER · CAN-FD</span>
+        <h3 class="layer-card__title">Software</h3>
+        <p>Module discovery protocol over CAN-FD, SpaceWire, or Ethernet-TSN — profile-selectable per mission.</p>
+        <ul>
+          <li>Module Descriptor broadcast on enumeration</li>
+          <li>Capability negotiation at discovery</li>
+          <li>Normalised telemetry schema across module types</li>
+          <li>Firmware version tracking + rollback support</li>
+          <li>No bespoke host firmware required for new modules</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ FSM STATES ════════════ -->
+<section class="fsm-section" aria-label="Docking FSM States">
+  <div class="container">
+    <div class="section-head section-head--center reveal">
+      <div class="section-head__tag"><span class="tag">Docking Protocol</span></div>
+      <h2 class="section-head__title">Finite State Machine —<br>8 Operational States</h2>
+      <p class="section-head__sub">Every docking sequence is governed by a deterministic FSM. Any anomaly returns the system to S0 (safe) via controlled power isolation.</p>
+    </div>
+
+    <div class="fsm-states reveal reveal-d1">
+      <div class="card fsm-state">
+        <div class="fsm-state__id">S0</div>
+        <div class="fsm-state__name">Decoupled / Safe</div>
+        <p class="fsm-state__desc">No module coupled or not electrically reliable. All rails disabled. PRESENT monitored.</p>
+      </div>
+      <div class="card fsm-state">
+        <div class="fsm-state__id">S1</div>
+        <div class="fsm-state__name">Presence Detected</div>
+        <p class="fsm-state__desc">Physical insertion detected. Debounce validation applied to avoid false positives from mechanical bounce.</p>
+      </div>
+      <div class="card fsm-state">
+        <div class="fsm-state__id">S2</div>
+        <div class="fsm-state__name">VCC_IL Energised</div>
+        <p class="fsm-state__desc">Current-limited initialisation rail enabled. Module boots minimal MCU/FPGA logic only.</p>
+      </div>
+      <div class="card fsm-state">
+        <div class="fsm-state__id">S3</div>
+        <div class="fsm-state__name">CAN Discovery</div>
+        <p class="fsm-state__desc">CAN stack active. Module announces ID, type, version, capabilities, and power profile.</p>
+      </div>
+      <div class="card fsm-state">
+        <div class="fsm-state__id">S4</div>
+        <div class="fsm-state__name">Power Negotiation</div>
+        <p class="fsm-state__desc">Host evaluates energy budget. Assigns max current, ramp rates, and priorities. Explicit authorisation sent.</p>
+      </div>
+      <div class="card fsm-state">
+        <div class="fsm-state__id">S5</div>
+        <div class="fsm-state__name">POWER Enabled</div>
+        <p class="fsm-state__desc">Main power rail energised via hot-swap/eFuse with inrush control. Overcurrent and undervoltage monitored.</p>
+      </div>
+      <div class="card fsm-state">
+        <div class="fsm-state__id">S6</div>
+        <div class="fsm-state__name">SpaceFibre Active</div>
+        <p class="fsm-state__desc">High-speed PHY trained and link synchronised. Module switches to full operational mode.</p>
+      </div>
+      <div class="card fsm-state fsm-state--nominal">
+        <div class="fsm-state__id">S7</div>
+        <div class="fsm-state__name">Nominal Operation</div>
+        <p class="fsm-state__desc">Module fully coupled, powered, and communicating. Continuous health monitoring active.</p>
+      </div>
+    </div>
+
+    <!-- Fault states -->
+    <div style="margin-top:12px;" class="reveal reveal-d2">
+      <p class="mono-label" style="margin-bottom:12px;display:block;">Fault States — All transitions return to S0</p>
+      <div class="fsm-states" style="grid-template-columns: repeat(3,1fr);">
+        <div class="card fsm-state fsm-state--fault">
+          <div class="fsm-state__id">F0</div>
+          <div class="fsm-state__name">Presence Lost</div>
+          <p class="fsm-state__desc">PRESENT deactivates during S2–S7. Immediate power isolation. All rails disabled. Return to S0.</p>
+        </div>
+        <div class="card fsm-state fsm-state--fault">
+          <div class="fsm-state__id">F1</div>
+          <div class="fsm-state__name">Overcurrent</div>
+          <p class="fsm-state__desc">Excess current on VCC_IL or POWER. Hardware protection trips. Cooldown lockout applied before retry.</p>
+        </div>
+        <div class="card fsm-state fsm-state--fault">
+          <div class="fsm-state__id">F2</div>
+          <div class="fsm-state__name">Negotiation Fail</div>
+          <p class="fsm-state__desc">CAN timeout, version incompatibility, or power profile not concedible. POWER kept disabled. Return to S0.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════ PAPER / COMING SOON ════════════ -->
+<section class="spec-coming" aria-label="Full specification">
+  <div class="container" style="max-width:660px;">
+    <span class="spec-coming__icon">📄</span>
+    <h2 class="spec-coming__title">Full Specification<br>Coming Soon</h2>
+    <p class="spec-coming__body">
+      The complete GOATSat v0.1 specification — including full connector electrical requirements,
+      interoperability profiles, and protocol reference implementation — is currently under review
+      for the iLCSS (IEEE L-CSS) publication. This page will be updated upon publication.
+    </p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="mailto:contact@goatsat.co?subject=GOATSat%20v0.1%20Specification%20Request" class="spec-coming__paper">
+        <span class="spec-coming__paper-icon">📋</span>
+        <div class="spec-coming__paper-text">
+          <div class="spec-coming__paper-title">Request Draft Specification</div>
+          <div class="spec-coming__paper-meta">GOAT-Sat v0.1 · iLCSS Draft · March 2026</div>
+        </div>
+      </a>
+      <a href="financials.html" class="btn btn--ghost" style="align-self:center;">View Financial Model →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer class="footer" aria-label="Footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p class="footer-brand__name">GOATSat</p>
+        <p class="footer-brand__tagline">A cutting-edge standard in modular microsatellite development.</p>
+        <div class="footer-brand__meta">
+          <span>ACT IN SPACE 2026</span><span>·</span><span>GOATSat v0.1</span>
+        </div>
+      </div>
+      <nav class="footer-nav">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Overview</a></li>
+          <li><a href="spec.html">Technical Spec</a></li>
+          <li><a href="financials.html">Financial Model</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-nav">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="mailto:contact@goatsat.co">Whitepaper</a></li>
+          <li><a href="mailto:contact@goatsat.co?subject=GOATSat%20v0.1%20Specification%20Request">v0.1 Draft (request)</a></li>
+          <li><a href="mailto:contact@goatsat.co">Contact</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-nav">
+        <h4>Team</h4>
+        <ul>
+          <li><a href="#">F. Gutiérrez</a></li>
+          <li><a href="#">L.A. Rodríguez</a></li>
+          <li><a href="#">J. Cardeño</a></li>
+          <li><a href="#">M.A. Cardona</a></li>
+          <li><a href="#">S. Cáceres</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 GOATSat · goatsat.co · Specification subject to revision. Not for distribution without permission.</p>
+      <div class="col-signature">
+        <span style="font-size:20px;">🦅</span>
+        <div class="col-bars"><span></span><span></span><span></span></div>
+        <span class="col-signature__text">Colombia</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>

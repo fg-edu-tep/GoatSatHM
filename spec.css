@@ -1,0 +1,129 @@
+/* ═══════════════════════════════════════════
+   GOATSat · SPEC PAGE STYLES
+   spec.css
+═══════════════════════════════════════════ */
+
+.spec-hero {
+  padding: calc(var(--nav-h) + 52px) var(--px) 56px;
+  border-bottom: 1px solid var(--border-0);
+  position: relative; z-index: 1;
+}
+.spec-hero__grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end;
+}
+.spec-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 58px);
+  font-weight: 800; letter-spacing: -0.03em;
+  line-height: 1.0; margin: 14px 0 16px;
+}
+.spec-hero__meta { display: flex; flex-direction: column; gap: 10px; }
+.spec-hero__meta-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 18px; border: 1px solid var(--border-0);
+  border-radius: var(--r-sm); background: var(--bg-card);
+  font-size: 13px;
+}
+.spec-hero__meta-item span:first-child {
+  font-family: var(--font-mono); color: var(--text-2);
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.spec-hero__meta-item span:last-child {
+  font-weight: 600; color: var(--text-0); font-family: var(--font-mono); font-size: 12px;
+}
+
+/* ── FSM Diagram section ── */
+.fsm-section { padding: clamp(48px,6vw,80px) 0; }
+.fsm-states {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px;
+  margin-top: 36px;
+}
+.fsm-state {
+  padding: 20px 22px; border-radius: var(--r-sm);
+  border: 1px solid var(--border-0);
+  background: var(--bg-card); position: relative;
+}
+.fsm-state:hover { border-color: var(--border-2); }
+.fsm-state__id {
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--blue-300); margin-bottom: 8px;
+}
+.fsm-state__name {
+  font-family: var(--font-display); font-size: 15px; font-weight: 700;
+  margin-bottom: 8px; color: var(--text-0);
+}
+.fsm-state__desc { font-size: 13px; color: var(--text-1); line-height: 1.55; }
+
+.fsm-state--fault { border-color: rgba(239,68,68,0.2); }
+.fsm-state--fault .fsm-state__id { color: var(--red); }
+.fsm-state--nominal { border-color: rgba(34,197,94,0.2); }
+.fsm-state--nominal .fsm-state__id { color: var(--green); }
+
+/* ── Coming Soon placeholder ── */
+.spec-coming {
+  padding: clamp(64px,10vw,120px) var(--px);
+  text-align: center; position: relative; z-index: 1;
+}
+.spec-coming__icon { font-size: 56px; margin-bottom: 24px; display: block; }
+.spec-coming__title {
+  font-family: var(--font-display); font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800; letter-spacing: -0.025em; margin-bottom: 16px;
+}
+.spec-coming__body {
+  font-size: 16px; color: var(--text-1); max-width: 520px;
+  margin: 0 auto 36px; line-height: 1.65;
+}
+.spec-coming__paper {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 20px 28px; border-radius: var(--r-md);
+  border: 1px solid var(--border-1); background: var(--bg-card);
+  text-decoration: none; color: var(--text-0);
+  transition: border-color var(--t-base), transform var(--t-base);
+  margin: 0 auto;
+}
+.spec-coming__paper:hover { border-color: var(--border-2); transform: translateY(-3px); }
+.spec-coming__paper-icon { font-size: 28px; }
+.spec-coming__paper-text { text-align: left; }
+.spec-coming__paper-title {
+  font-family: var(--font-display); font-size: 16px; font-weight: 700;
+}
+.spec-coming__paper-meta {
+  font-size: 12px; color: var(--text-2); font-family: var(--font-mono);
+  margin-top: 3px;
+}
+
+/* ── Layers grid ── */
+.layers-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.layer-card { padding: clamp(24px,3vw,36px) clamp(20px,2.5vw,30px); }
+.layer-card__icon { font-size: 28px; margin-bottom: 16px; display: block; }
+.layer-card__title {
+  font-family: var(--font-display); font-size: 19px; font-weight: 700;
+  margin-bottom: 8px;
+}
+.layer-card__badge {
+  font-family: var(--font-mono); font-size: 10px; color: var(--blue-300);
+  background: rgba(59,130,246,0.08); border: 1px solid var(--border-1);
+  padding: 3px 9px; border-radius: 4px; display: inline-block; margin-bottom: 14px;
+}
+.layer-card p { font-size: 13.5px; color: var(--text-1); line-height: 1.6; }
+.layer-card ul {
+  list-style: none; margin-top: 14px;
+  display: flex; flex-direction: column; gap: 7px;
+}
+.layer-card ul li {
+  font-size: 13px; color: var(--text-1);
+  padding-left: 14px; position: relative;
+}
+.layer-card ul li::before {
+  content: '—'; position: absolute; left: 0;
+  color: var(--blue-300); font-size: 11px;
+}
+
+@media (max-width: 900px) {
+  .spec-hero__grid { grid-template-columns: 1fr; gap: 28px; }
+  .layers-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .fsm-states { grid-template-columns: 1fr 1fr; }
+}

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GOATSat — 10-Year Financial Model</title>
+<meta name="description" content="GOATSat conservative 10-year financial projection. NPV $194.7M · IRR 76.8% · Payback Year 7. European Hub scenario." />
+<meta name="theme-color" content="#030710" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/nav.css" />
+<link rel="stylesheet" href="css/financials.css" />
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<script>
+  (function(){
+    var t=localStorage.getItem('goatsat-theme');
+    if(!t) t=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+    document.documentElement.setAttribute('data-theme',t);
+  })();
+</script>
+</head>
+<body>
+
+<canvas id="starfield" aria-hidden="true"></canvas>
+
+<!-- ════════════ NAV ════════════ -->
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="GOATSat home">
+      <div class="nav-logo__badge" aria-hidden="true">GS</div>
+      <span class="nav-logo__text">GOATSat</span>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="index.html#problem">The Problem</a></li>
+      <li><a href="index.html#standard">The Standard</a></li>
+      <li><a href="index.html#ecosystem">Ecosystem</a></li>
+      <li><a href="financials.html" class="active">Financial Model</a></li>
+      <li><a href="spec.html">v0.1 Spec</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="col-flag" title="Made in Colombia 🇨🇴" aria-label="Colombian flag">
+        <span></span><span></span><span></span>
+      </div>
+      <button class="theme-toggle" id="themeBtn" aria-label="Toggle colour theme">☽</button>
+      <a href="mailto:contact@goatsat.co?subject=GOATSat%20Financial%20Model%20Request" class="btn btn--tricolor hide-mobile">Request Excel Model</a>
+      <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="index.html#problem">The Problem</a>
+  <a href="index.html#standard">The Standard</a>
+  <a href="spec.html">Technical Spec</a>
+  <a href="financials.html">Financial Model</a>
+  <a href="mailto:contact@goatsat.co?subject=GOATSat%20Financial%20Model%20Request" class="btn btn--primary mobile-cta">Request Excel Model</a>
+</div>
+
+<!-- ════════════ PAGE HERO ════════════ -->
+<header class="fin-hero" aria-label="Financial Model header">
+  <div class="container" style="max-width:760px;">
+    <div class="page-crumb">
+      <a href="index.html">GOATSat</a>
+      <span>›</span>
+      <span>Financial Model</span>
+    </div>
+    <span class="tag" style="margin-bottom:14px;display:inline-flex;">10-Year Projection</span>
+    <h1 class="fin-hero__title">
+      From Standard to Scale —<br>
+      <span class="text-gradient">A 10-Year Roadmap</span>
+    </h1>
+    <p class="fin-hero__sub">Conservative European Hub scenario · All values in USD · Full annotated Excel available upon request</p>
+  </div>
+</header>
+
+<!-- ════════════ STICKY KPI BAR ════════════ -->
+<div class="kpi-bar" role="region" aria-label="Key financial indicators">
+  <div class="kpi-bar__inner">
+    <div class="kpi-item">
+      <span class="kpi-item__val kpi-item__val--green">$194.7M</span>
+      <span class="kpi-item__label">NPV @ 9% WACC</span>
+    </div>
+    <div class="kpi-item">
+      <span class="kpi-item__val kpi-item__val--gold">76.8%</span>
+      <span class="kpi-item__label">IRR vs 9% Hurdle</span>
+    </div>
+    <div class="kpi-item">
+      <span class="kpi-item__val">Year 7</span>
+      <span class="kpi-item__label">Payback (Cum. FCF+)</span>
+    </div>
+    <div class="kpi-item">
+      <span class="kpi-item__val kpi-item__val--red">($6.51M)</span>
+      <span class="kpi-item__label">Max Drawdown Y4</span>
+    </div>
+    <div class="kpi-item">
+      <span class="kpi-item__val kpi-item__val--gold">$165.2M</span>
+      <span class="kpi-item__label">Terminal Value (PV)</span>
+    </div>
+    <div class="kpi-item">
+      <span class="kpi-item__val">9.01%</span>
+      <span class="kpi-item__label">Hurdle · Damodaran</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ MAIN CONTENT ════════════ -->
+<main class="section">
+  <div class="container">
+
+    <!-- Phase Timeline -->
+    <div class="phase-timeline reveal" role="navigation" aria-label="Phase navigation">
+      <div class="phase-tl__item active" data-phase="p1">
+        <div class="phase-tl__dot">1</div>
+        <div class="phase-tl__name">R&amp;D</div>
+        <div class="phase-tl__years">Y1–Y2</div>
+      </div>
+      <div class="phase-tl__item" data-phase="p2">
+        <div class="phase-tl__dot">2</div>
+        <div class="phase-tl__name">Validation</div>
+        <div class="phase-tl__years">Y3–Y4</div>
+      </div>
+      <div class="phase-tl__item" data-phase="p3">
+        <div class="phase-tl__dot">3</div>
+        <div class="phase-tl__name">Commercial Scale</div>
+        <div class="phase-tl__years">Y5–Y7</div>
+      </div>
+      <div class="phase-tl__item" data-phase="p4">
+        <div class="phase-tl__dot">4</div>
+        <div class="phase-tl__name">Maturity</div>
+        <div class="phase-tl__years">Y8–Y10</div>
+      </div>
+    </div>
+
+    <!-- FCF Chart -->
+    <div class="card chart-card reveal reveal-d1">
+      <div class="chart-card__title">Free Cash Flow — Annual &amp; Cumulative</div>
+      <div class="chart-card__sub">BARS: ANNUAL FCF (green = positive, red = negative) · LINE: CUMULATIVE FCF (gold) · HOVER FOR YEAR DETAIL</div>
+      <div class="chart-card__canvas">
+        <canvas id="fcfChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Phase Cards -->
+    <div class="phase-cards">
+
+      <!-- Phase 1 -->
+      <article class="card phase-card phase-card--p1 reveal" id="card-p1" aria-label="Phase 1 — R&D">
+        <div class="phase-card__header">
+          <div>
+            <h2 class="phase-card__title">Phase 1 — R&amp;D &amp; Standard Development</h2>
+            <p class="phase-card__years">YEARS 1–2 · ENGINEERING &amp; IP FOUNDATION</p>
+          </div>
+          <div>
+            <div class="phase-card__fcf phase-card__fcf--neg">−$1.41M / −$2.40M</div>
+            <div class="phase-card__fcf-label">Annual FCF Y1 / Y2</div>
+          </div>
+        </div>
+
+        <p class="phase-card__body">GOATSat's foundational phase: engineering the standard, filing the patent portfolio across PCT/USPTO/EPO, and delivering the orbital demonstration hardware. No licensing revenue yet — this is pure investment. CapEx peaks at $1.1M in Year 2 to cover SpaceX Transporter-class rideshare and ESTEC TVAC qualification.</p>
+
+        <div class="phase-card__pills">
+          <span class="pill pill--red">FCF Y1: −$1.41M</span>
+          <span class="pill pill--red">FCF Y2: −$2.40M</span>
+          <span class="pill pill--blue">CapEx Peak: $1.1M (Y2)</span>
+          <span class="pill pill--gold">Grants: $175k (ESA BIC + Spark)</span>
+          <span class="pill pill--blue">Cum. FCF: −$3.82M</span>
+        </div>
+
+        <blockquote class="blockquote">
+          "Year 2 CapEx of $1.1M reflects the true cost of a SpaceX Transporter-class rideshare + ESTEC TVAC qualification. R&amp;D is expensive — we don't hide it."
+        </blockquote>
+      </article>
+
+      <!-- Phase 2 -->
+      <article class="card phase-card phase-card--p2 reveal" id="card-p2" aria-label="Phase 2 — Validation">
+        <div class="phase-card__header">
+          <div>
+            <h2 class="phase-card__title">Phase 2 — Validation &amp; Early Adoption</h2>
+            <p class="phase-card__years">YEARS 3–4 · COMMERCIAL LAUNCH · VALLEY OF DEATH</p>
+          </div>
+          <div>
+            <div class="phase-card__fcf phase-card__fcf--neg">−$1.70M / −$0.99M</div>
+            <div class="phase-card__fcf-label">Annual FCF Y3 / Y4</div>
+          </div>
+        </div>
+
+        <p class="phase-card__body">The standard launches commercially. Three founding adopters sign licensing agreements in Year 3. Drawdown reaches its peak of <strong style="color:var(--red);">$6.51M at end of Year 4</strong> — the valley of death is deepest here, and shortest for investors who enter now. Aerospace design cycles run 18–36 months; early adopters are designing their next-gen bus today.</p>
+
+        <div class="phase-card__pills">
+          <span class="pill pill--blue">Revenue Y3: $210k</span>
+          <span class="pill pill--blue">Revenue Y4: $1.1M</span>
+          <span class="pill pill--gold">Adopters Y3: 3</span>
+          <span class="pill pill--gold">Adopters Y4: 7</span>
+          <span class="pill pill--red">Max Drawdown: −$6.51M (end Y4)</span>
+        </div>
+
+        <blockquote class="blockquote">
+          "Aerospace design cycles run 18–36 months. Early adopters are designing their next-gen bus today — not retrofitting current hardware."
+        </blockquote>
+      </article>
+
+      <!-- Phase 3 -->
+      <article class="card phase-card phase-card--p3 reveal" id="card-p3" aria-label="Phase 3 — Commercial Scale">
+        <div class="phase-card__header">
+          <div>
+            <h2 class="phase-card__title">Phase 3 — Commercial Scale</h2>
+            <p class="phase-card__years">YEARS 5–7 · FCF POSITIVE · PAYBACK ACHIEVED</p>
+          </div>
+          <div>
+            <div class="phase-card__fcf phase-card__fcf--pos">+$0.68M → +$8.08M</div>
+            <div class="phase-card__fcf-label">Annual FCF Y5 → Y7</div>
+          </div>
+        </div>
+
+        <p class="phase-card__body">FCF turns positive in Year 5. The S-curve inflects at Year 6 as network effects emerge — every new adopter increases the value of the standard for all existing ones. <strong style="color:var(--green);">Cumulative FCF crosses zero in Year 7 — payback achieved at +$5.85M.</strong></p>
+
+        <div class="phase-card__pills">
+          <span class="pill pill--blue">Revenue Y5: $3.54M</span>
+          <span class="pill pill--blue">Revenue Y6: $7.77M</span>
+          <span class="pill pill--blue">Revenue Y7: $14.0M</span>
+          <span class="pill pill--gold">Adopters Y7: 40</span>
+          <span class="pill pill--gold">Modules Y7: 520</span>
+          <span class="pill pill--green">Cumulative FCF Y7: +$5.85M ✓</span>
+        </div>
+
+        <blockquote class="blockquote">
+          "Year 7 is when GOATSat stops being a bet and starts being an asset."
+        </blockquote>
+      </article>
+
+      <!-- Phase 4 -->
+      <article class="card phase-card phase-card--p4 reveal" id="card-p4" aria-label="Phase 4 — Market Maturity">
+        <div class="phase-card__header">
+          <div>
+            <h2 class="phase-card__title">Phase 4 — Market Maturity</h2>
+            <p class="phase-card__years">YEARS 8–10 · ROYALTY-LED · TERMINAL VALUE</p>
+          </div>
+          <div>
+            <div class="phase-card__fcf phase-card__fcf--pos">+$14.3M → +$26.9M</div>
+            <div class="phase-card__fcf-label">Annual FCF Y8 → Y10</div>
+          </div>
+        </div>
+
+        <p class="phase-card__body">The standard approaches SAM saturation at 82 adopting manufacturers. Revenue mix is predominantly royalty-led — the highest-margin stream. Terminal value crystallizes at <strong style="color:var(--gold);">$165.2M (Gordon-Shapiro PV)</strong>. Year 10 cumulative FCF: +$67.7M.</p>
+
+        <div class="phase-card__pills">
+          <span class="pill pill--blue">Revenue Y10: $39.2M</span>
+          <span class="pill pill--gold">Modules Y10: 1,550</span>
+          <span class="pill pill--gold">Adopters Y10: 82</span>
+          <span class="pill pill--green">Cumulative FCF Y10: +$67.7M</span>
+          <span class="pill pill--gold">Terminal Value (PV): $165.2M</span>
+        </div>
+
+        <blockquote class="blockquote">
+          "Some OEMs will retain proprietary interfaces. Our ceiling is conservative by design."
+        </blockquote>
+      </article>
+
+    </div><!-- /phase-cards -->
+
+    <!-- Assumptions Accordion -->
+    <section aria-label="Model Assumptions" class="reveal">
+      <div class="section-head">
+        <span class="tag">Model Assumptions</span>
+        <h2 class="section-head__title" style="font-size:clamp(22px,3vw,32px);margin-top:12px;">All figures conservative.<br>All sources cited.</h2>
+      </div>
+
+      <div class="accordion">
+
+        <div class="accordion__item" id="acc-macro">
+          <button class="accordion__trigger" aria-expanded="false" aria-controls="acc-macro-body">
+            <span>Macro &amp; Jurisdiction</span>
+            <span class="accordion__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion__body" id="acc-macro-body" role="region">
+            <table>
+              <thead><tr><th>Parameter</th><th>Value</th><th>Source</th></tr></thead>
+              <tbody>
+                <tr><td>Discount Rate / WACC</td><td>9.01%</td><td><a href="https://pages.stern.nyu.edu/~adamodar" target="_blank" rel="noopener">Damodaran (NYU) ↗</a></td></tr>
+                <tr><td>Corporate Tax Rate</td><td>12.74%</td><td>Blended EU avg. (France / Germany / Italy)</td></tr>
+                <tr><td>R&amp;D Net Effective Rate</td><td>17.5% from Y5</td><td>France CIR 30% research credit</td></tr>
+                <tr><td>Inflation / OPEX Escalator</td><td>2.0%</td><td>ECB HICP benchmark</td></tr>
+                <tr><td>Reporting Currency</td><td>USD</td><td>Space hardware contracts standard</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="accordion__item" id="acc-rev">
+          <button class="accordion__trigger" aria-expanded="false" aria-controls="acc-rev-body">
+            <span>Revenue Model Assumptions</span>
+            <span class="accordion__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion__body" id="acc-rev-body" role="region">
+            <table>
+              <thead><tr><th>Parameter</th><th>Value</th><th>Rationale</th></tr></thead>
+              <tbody>
+                <tr><td>Annual License Fee</td><td>$50,000 / manufacturer / yr</td><td>Conservative vs. HDMI LA benchmark ×5 aerospace premium</td></tr>
+                <tr><td>Module Royalty Rate</td><td>5.0%</td><td>Below 3–7% industry range; negotiated with prime contractors</td></tr>
+                <tr><td>Avg. Module Sale Price</td><td>$450,000</td><td>Conservative vs. $500k+ at maturity (GomSpace, Endurosat)</td></tr>
+                <tr><td>Certification Fee</td><td>$20,000 one-time</td><td>AS9100 / DO-178C analogues; early adopters may receive discount</td></tr>
+                <tr><td>Adoption Model</td><td>S-Curve</td><td>Consistent with AS9100 aerospace design cycle (18–36 months)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="accordion__item" id="acc-cost">
+          <button class="accordion__trigger" aria-expanded="false" aria-controls="acc-cost-body">
+            <span>Cost Structure (OPEX Year 1 Base)</span>
+            <span class="accordion__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion__body" id="acc-cost-body" role="region">
+            <table>
+              <thead><tr><th>Item</th><th>Year 1</th><th>Growth Rate</th></tr></thead>
+              <tbody>
+                <tr><td>Engineering Payroll (EU Hub, incl. social charges)</td><td>$900,000</td><td>+18% / yr</td></tr>
+                <tr><td>IP &amp; Legal Filings (PCT / USPTO / EPO)</td><td>$200,000</td><td>One-time front-loaded</td></tr>
+                <tr><td>SG&amp;A / Ecosystem Marketing</td><td>$150,000</td><td>+25% / yr</td></tr>
+                <tr><td>D&amp;A — Patent Amortization</td><td>$25,000</td><td>+$25k step / yr</td></tr>
+                <tr><td><strong>Total OPEX Y1</strong></td><td><strong>$1,250,000</strong></td><td>—</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="accordion__item" id="acc-grants">
+          <button class="accordion__trigger" aria-expanded="false" aria-controls="acc-grants-body">
+            <span>Non-Dilutive Grants</span>
+            <span class="accordion__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion__body" id="acc-grants-body" role="region">
+            <table>
+              <thead><tr><th>Year</th><th>Amount</th><th>Source</th></tr></thead>
+              <tbody>
+                <tr><td>Y1</td><td>$100,000</td><td>ESA BIC (conservative baseline)</td></tr>
+                <tr><td>Y2</td><td>$75,000</td><td>ESA Spark programme</td></tr>
+                <tr><td>—</td><td>Not modeled</td><td>NASA TechLeap ($500k) — not modeled until application confirmed</td></tr>
+                <tr><td>—</td><td>Not modeled</td><td>Horizon Europe grants — not modeled until awarded</td></tr>
+              </tbody>
+            </table>
+            <p class="accordion__note">All figures are conservative and biased toward underperformance. Full source annotations available in the Excel financial model upon request.</p>
+          </div>
+        </div>
+
+        <div class="accordion__item" id="acc-method">
+          <button class="accordion__trigger" aria-expanded="false" aria-controls="acc-method-body">
+            <span>Methodology &amp; Disclosures</span>
+            <span class="accordion__icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion__body" id="acc-method-body" role="region">
+            <table>
+              <thead><tr><th>Item</th><th>Approach</th></tr></thead>
+              <tbody>
+                <tr><td>FCF Formula</td><td>NOPAT + D&amp;A − CapEx − ΔWKC</td></tr>
+                <tr><td>Terminal Value</td><td>Gordon-Shapiro: TV = FCF₁₀ × (1+g) / (r−g), discounted at 9%</td></tr>
+                <tr><td>Working Capital Change</td><td>12% of incremental revenue (Damodaran A&amp;D sector: 41.2%; IP model significantly lower)</td></tr>
+                <tr><td>Tax Rate Application</td><td>Preferential R&amp;D rate (17.5%) applied from Y5 only — conservative vs. Y3 eligibility</td></tr>
+                <tr><td>Adoption Ramp</td><td>S-curve consistent with aerospace design timelines (AS9100, 18–36 month cycles)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /accordion -->
+    </section>
+
+    <!-- CTA -->
+    <div class="card fin-cta reveal">
+      <h3>Request the Full 10-Year Financial Model</h3>
+      <p>Annotated Excel with complete FCF bridge, sensitivity analysis, scenario modelling, and Gordon-Shapiro terminal value workings — available to qualified investors and strategic partners.</p>
+      <div class="fin-cta__actions">
+        <a href="mailto:contact@goatsat.co?subject=GOATSat%20Financial%20Model%20Request" class="btn btn--primary">
+          Request Model → contact@goatsat.co
+        </a>
+        <a href="index.html" class="btn btn--ghost">← Back to Overview</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer class="footer" aria-label="Footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p class="footer-brand__name">GOATSat</p>
+        <p class="footer-brand__tagline">A cutting-edge standard in modular microsatellite development.</p>
+        <div class="footer-brand__meta">
+          <span>ACT IN SPACE 2026</span><span>·</span><span>GOATSat v0.1</span>
+        </div>
+      </div>
+      <nav class="footer-nav" aria-label="Site pages">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Overview</a></li>
+          <li><a href="spec.html">Technical Spec</a></li>
+          <li><a href="financials.html">Financial Model</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-nav" aria-label="Resources">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="mailto:contact@goatsat.co">Whitepaper</a></li>
+          <li><a href="mailto:contact@goatsat.co?subject=GOATSat%20Financial%20Model%20Request">Excel Model</a></li>
+          <li><a href="mailto:contact@goatsat.co">Contact</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-nav" aria-label="Team">
+        <h4>Team</h4>
+        <ul>
+          <li><a href="#">F. Gutiérrez</a></li>
+          <li><a href="#">L.A. Rodríguez</a></li>
+          <li><a href="#">J. Cardeño</a></li>
+          <li><a href="#">M.A. Cardona</a></li>
+          <li><a href="#">S. Cáceres</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 GOATSat · goatsat.co · Financial projections are conservative estimates. Not an offer of securities.</p>
+      <div class="col-signature">
+        <span style="font-size:20px;">🦅</span>
+        <div class="col-bars"><span></span><span></span><span></span></div>
+        <span class="col-signature__text">Colombia</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+<script src="js/financials.js"></script>
+</body>
+</html>
