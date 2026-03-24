@@ -49,6 +49,12 @@
   box-shadow: 0 0 16px rgba(59,130,246,0.45);
   flex-shrink: 0;
 }
+.nav-logo__img {
+  width: 34px;
+  height: 34px;
+  display: block;
+  flex-shrink: 0;
+}
 .nav-logo__text {
   font-family: var(--font-display); font-size: 19px;
   font-weight: 800; letter-spacing: -0.025em;
